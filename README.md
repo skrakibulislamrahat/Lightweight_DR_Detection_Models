@@ -1,77 +1,61 @@
-🧠 Evaluation of Lightweight AI Models for Early Detection of Diabetic Retinopathy
-This repository contains code, results, and documentation for our study titled:
-“Evaluation of Lightweight AI Models for Early Detection of Diabetic Retinopathy in Mobile-Friendly Clinical Settings.”
+# Lightweight Deep Learning for Referable Diabetic Retinopathy
 
-📄 The study benchmarks three lightweight convolutional neural networks—EfficientNetB0, MobileNetV2_100, and SqueezeNet1_0—on the APTOS 2019 Blindness Detection dataset, focusing on binary classification of referable vs. non-referable diabetic retinopathy (DR) cases.
+This repository accompanies a research project evaluating compact convolutional neural networks for **referable diabetic retinopathy (DR) classification** from retinal fundus images, with emphasis on reproducibility and deployment-oriented model comparison.
 
-🔍 Research Highlights
-🧪 Dataset: APTOS 2019
+## Study design
 
-📊 Models: EfficientNetB0, MobileNetV2_100, SqueezeNet1_0
+The current experimental protocol evaluates three lightweight architectures:
 
-🧠 Task: Binary DR classification (0–1 → Non-referable, 2–4 → Referable)
+- **EfficientNet-B0**
+- **MobileNetV2 (1.0 width)**
+- **SqueezeNet 1.0**
 
-📈 Top Accuracy: EfficientNetB0 at 93.52% (F1: 0.9221, AUC: 0.9331)
+APTOS 2019 labels are converted to a binary screening task:
 
-⚡ Deployability Focus: Emphasis on real-time mobile/low-resource use
+- grades 0–1 → **non-referable DR**
+- grades 2–4 → **referable DR**
 
-✅ Reproducibility: Results are consistent, reproducible, and documented
+The major-revision experiment uses **5-fold stratified cross-validation**, ImageNet initialization, data augmentation, early stopping, and out-of-fold predictions. Metrics include accuracy, precision, sensitivity, specificity, F1-score, and AUROC. Pairwise McNemar tests are used to compare prediction disagreements between architectures.
 
-🗂 Repository Structure
-graphql
-Copy
-Edit
-Lightweight_DR_Detection_Models/
-├── models/             # CNN model definitions (EfficientNetB0, MobileNetV2, etc.)
-├── notebooks/          # Training, evaluation, and visualization notebooks
-│   ├── training.ipynb
-│   ├── evaluation.ipynb
-│   └── metrics_visualization.ipynb
-├── results/            # ROC curves, confusion matrices, bar charts
-├── utils/              # Helper functions for preprocessing and metrics
-├── requirements.txt    # Python package dependencies
-└── README.md           # You're here!
-🛠️ How to Run
-Clone the repository:
+## Cross-validation results
 
-bash
-Copy
-Edit
-git clone https://github.com/skrakibulislamrahat/Lightweight_DR_Detection_Models.git
-cd Lightweight_DR_Detection_Models
-Install dependencies:
+| Model | Accuracy | Sensitivity | Specificity | F1 | AUROC |
+|---|---:|---:|---:|---:|---:|
+| EfficientNet-B0 | 0.9394 ± 0.0137 | 0.9482 ± 0.0219 | 0.9333 ± 0.0139 | 0.9270 ± 0.0167 | 0.9839 ± 0.0054 |
+| MobileNetV2 | 0.9358 ± 0.0113 | 0.9354 ± 0.0203 | 0.9361 ± 0.0141 | 0.9221 ± 0.0138 | 0.9847 ± 0.0048 |
+| SqueezeNet 1.0 | 0.9342 ± 0.0137 | 0.9327 ± 0.0290 | 0.9352 ± 0.0110 | 0.9199 ± 0.0174 | 0.9813 ± 0.0069 |
 
-bash
-Copy
-Edit
-pip install -r requirements.txt
-Download the dataset:
+Values are mean ± sample standard deviation across five folds.
 
-From: APTOS 2019 on Kaggle
+The pairwise McNemar comparisons in the completed experiment were not statistically significant at α = 0.05, indicating that the three models had similar error-disagreement patterns despite differences in architecture and computational footprint.
 
-Place inside: data/ directory (not included due to license)
+## Repository contents
 
-Run training and evaluation:
+```text
+.
+├── Lightweight_DR_Model_Colab.ipynb   # Original end-to-end Colab implementation
+├── Results/                            # Saved visual/result artifacts currently tracked
+├── model_comparison_bar_chart.png      # Model comparison visualization
+├── EXPERIMENT_PROTOCOL.md              # Current five-fold evaluation protocol
+├── RESULTS.md                          # Validated revision results and statistical comparisons
+├── requirements.txt                    # Core Python dependencies
+└── README.md
+```
 
-Use notebooks/training.ipynb for model training
+The repository intentionally does **not** claim directories or scripts that are not actually tracked.
 
-Use notebooks/evaluation.ipynb for metrics and plots
+## Reproducibility notes
 
-📊 Results Summary
-Model	Accuracy	F1-Score	AUC	Inference Time
-EfficientNetB0	93.52%	0.9221	0.9331	35 ms
-MobileNetV2_100	93.21%	0.9153	0.9285	28 ms
-SqueezeNet1_0	92.64%	0.9029	0.9220	19 ms
+The newer research workflow was developed in Google Colab using APTOS 2019 and a separate Messidor-2 workspace for external-validation work. Raw medical-image datasets and trained checkpoints are not distributed here. See [`EXPERIMENT_PROTOCOL.md`](EXPERIMENT_PROTOCOL.md) for the protocol and [`RESULTS.md`](RESULTS.md) for the validated summary.
 
-📌 Inference time was measured using Google Colab Pro+ with NVIDIA Tesla T4 GPUs.
+## Why this project matters
 
-📁 Citation
-If you use this code or cite the findings, please reference the paper:
+For low-resource or mobile screening systems, predictive performance alone is insufficient. A useful model must also have a manageable computational footprint and stable behavior across resampling. This project therefore treats architecture efficiency, cross-validation stability, sensitivity/specificity balance, and statistical model comparison as first-class evaluation targets.
 
-SK Rakib Ul Islam Rahat, et al.
-"Evaluation of Lightweight AI Models for Early Detection of Diabetic Retinopathy in Mobile-Friendly Clinical Settings"
-(Submitted to Computer Science and Information Systems – ComSIS, 2025)
+## Research status
 
-🤝 Contact
-For questions, please contact:
-📧 skrakibulislamrahat@gmail.com
+This repository documents an active research project. A formal paper citation/DOI will be added only when stable publication metadata is available.
+
+## Responsible use
+
+The code and results are for research and reproducibility. They are **not a clinical diagnostic system** and should not be used for patient-care decisions without appropriate external validation, governance, and regulatory review.
