@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use this repository, please cite the repository and the associated paper once stable publication metadata is available."
+title: "Lightweight Deep Learning for Referable Diabetic Retinopathy"
+type: software
+authors:
+  - family-names: "Rahat"
+    given-names: "SK Rakib Ul Islam"
+    orcid: "https://orcid.org/0009-0005-0744-8398"
+repository-code: "https://github.com/skrakibulislamrahat/Lightweight_DR_Detection_Models"
+url: "https://github.com/skrakibulislamrahat/Lightweight_DR_Detection_Models"
+abstract: "Research code and validated cross-validation results for comparing EfficientNet-B0, MobileNetV2, and SqueezeNet on referable diabetic-retinopathy screening."
+keywords:
+  - medical AI
+  - diabetic retinopathy
+  - lightweight deep learning
+  - cross-validation
+  - model comparison
