@@ -1,5 +1,7 @@
 # Lightweight Deep Learning for Referable Diabetic Retinopathy
 
+> **Research hub:** [Portfolio view](https://skrakibulislamrahat.github.io/#project-lightweight) · [Experiment protocol](EXPERIMENT_PROTOCOL.md) · [Validated results](RESULTS.md) · [Citation metadata](CITATION.cff)
+
 This repository accompanies a research project evaluating compact convolutional neural networks for **referable diabetic retinopathy (DR) classification** from retinal fundus images, with emphasis on reproducibility, cross-validation stability, and deployment-oriented model comparison.
 
 ## Study design
